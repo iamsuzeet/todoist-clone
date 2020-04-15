@@ -6,6 +6,7 @@ import { collatedTasks } from './../constants/index';
 import { getTitle, getCollatedTitle, collatedTasksExist } from './../helpers';
 
 import { useSelectedProjectValue, useProjectsValue } from '../context';
+import { AddTask } from './AddTask';
 
 export const Tasks = () => {
   const { selectedProject } = useSelectedProjectValue();
@@ -16,13 +17,15 @@ export const Tasks = () => {
 
   if (projects && selectedProject && !collatedTasksExist(selectedProject)) {
     projectName = getTitle(projects, selectedProject).name;
-    // console.log('ProjectName 1: ', projectName);
+    console.log('ProjectName 1: ', projectName);
   }
 
   if (collatedTasksExist(selectedProject) && selectedProject) {
     projectName = getCollatedTitle(collatedTasks, selectedProject).name;
     console.log('projectName 2: ', projectName);
   }
+
+  console.log(tasks);
 
   useEffect(() => {
     document.title = `${projectName}: Todolist`;
@@ -39,6 +42,8 @@ export const Tasks = () => {
           </li>
         ))}
       </ul>
+
+      <AddTask />
     </div>
   );
 };
