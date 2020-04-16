@@ -8,7 +8,7 @@ export const AddProject = ({ shouldShow = false }) => {
   const [projectName, setProjectName] = useState('');
 
   const projectId = generatePushId();
-  const { setProjects } = useProjectsValue();
+  const { projects, setProjects } = useProjectsValue();
 
   const addProject = () =>
     projectName &&
@@ -17,13 +17,13 @@ export const AddProject = ({ shouldShow = false }) => {
       .collection('projects')
       .add({ projectId, name: projectName, userId: 'YTBgchv69aTZefrM2tbh' })
       .then(() => {
-        setProjects([]);
+        setProjects([...projects]);
         setProjectName('');
         setShow(false);
       });
 
   return (
-    <div className="add-project" data-testId="add-project">
+    <div className="add-project" data-testid="add-project">
       {show && (
         <div className="add-project__input">
           <input
@@ -47,7 +47,9 @@ export const AddProject = ({ shouldShow = false }) => {
             className="add-project-cancel"
             data-testid="hide-project-overlay"
             onClick={() => setShow(false)}
-          ></span>
+          >
+            Cancel
+          </span>
         </div>
       )}
       <span className="add-project__plus">+</span>
