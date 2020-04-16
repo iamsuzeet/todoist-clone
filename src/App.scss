@@ -658,7 +658,6 @@ header {
   &__list li {
     @include task-item();
     padding: 0;
-
     div:nth-child(1) {
       padding: 10px;
       width: 100%;
